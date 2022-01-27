@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function showMessage(text) {
       messageText.innerText = text;
       messageText.classList.add("animate__animated");
-      messageText.classList.add("animate__bounce");
-      messageText.style.display = "block";
+      messageText.classList.add("animate__rubberBand");
+      messageText.style.display = "table";
     };
 
 
@@ -78,7 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
     async function handleSubmitWord() {
         const currentWordArr  = getCurrentWordArr();
         if (currentWordArr.length != 5) {
-            window.alert("Must Be Five Letters");
+            const gameBoard = document.getElementById("board");
+            showMessage("Must Be Five Letters");
             return;
         };
 
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
           resOne.def;
         } catch (error) {
           showMessage("Not In Word List");
-          return;;
+          return;
         };
 
         const currentWord = currentWordArr.join('');
@@ -122,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createSquares() {
         const gameBoard = document.getElementById("board");
-
         for (let index = 0; index < 30; index++) {
             let square = document.createElement("div");
             square.classList.add("square");
@@ -134,9 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleDeleteLetter() {
         const currentWordArr = getCurrentWordArr();
+        if (currentWordArr.length === 0) {
+          return
+        }
         const removedLetter = currentWordArr.pop();
 
-        if (messageText.style.display === "block") {
+        if (messageText.style.display === "table") {
           messageText.style.display = "none";
         }
     
@@ -149,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
     
-    const forLoop = async forLoop => {
+    async function forLoop() {
         for (let i = 0; i < keys.length; i++) {
             keys[i].onclick = ({ target }) => {
               const letter = target.getAttribute("data-key");
@@ -167,18 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
               updateGuessedWords(letter);
             };
         };
-
-        /* 
-        let res = await fetch("https://dictionaryapi.com/api/v3/references/sd3/json/gh?key=930fd199-60e3-4396-bc16-9cd4ccc8c4b0");
-        let response = await res.json();
-        console.log(response);
-        let resOne = response[0];
-        if (resOne.def) {
-            console.log("That's A Valid Valid Word");
-        } else {
-            console.log("That's Not A Valid Valid Word");
-        };
-        */
     };
 
 

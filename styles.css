@@ -69,7 +69,32 @@
     justify-content: center;
     align-items: center;
   }
-  
+
+
+  @media only screen and (max-height: 665px) {
+    .square {
+      min-width: 40px;
+      min-height: 40px;
+      font-size: 30px;
+    }
+  }
+
+  @media only screen and (max-height: 555px) {
+    .square {
+      min-width: 30px;
+      min-height: 30px;
+      font-size: 20px;
+    }
+  }
+
+  @media only screen and (max-height: 490px) {
+    .square {
+      min-width: 20px;
+      min-height: 20px;
+      font-size: 10px;
+    }
+  }
+
   #keyboard-container {
     height: 200px;
   }
