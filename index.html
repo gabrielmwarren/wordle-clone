@@ -7,17 +7,16 @@
     <title>Wordle Clone!</title>
     <script src="script.js"></script>
     <script src="words.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="light.css">
 </head>
 <body>
     <div id="container">
         <div id="game">
-            <header>
-                <h1 class="title">WORDLE</h1>
+            <header style="text-align: center;">
+                <h1 class="title" style="display: inline-block; text-align: center;">WORDLE</h1>
+                <button style="position: absolute; border: none; background: none; display: inline-block; margin-left: 5%; margin-top: 15px;" onclick="const settingsEl = document.getElementById('settings'); settingsEl.style.display = 'block';"><i class="fa fa-cog fa-2x"></i></button>
             </header>
             <h2 id="messageText" class="animate__animated animate__bounce" style="color: black; background-color: white; border-radius: 4px; text-align: center; padding: 10px; width: 50%; margin: 10px auto; display: none;"></h2>
             <div id="board-container">
@@ -62,7 +61,12 @@
                 </div>
             </div>
         </div>
+        <div id="settings" class="animate__animated animate__backInUp" style="height: 100%; background-color: white; position: absolute; width: 100%; display: none;">
+          <h1 style="font-size: 35px; text-align: center;">Settings</h1>
+          <h3 style="text-align: center; margin-top: 100px; padding-bottom: 30px;">Dark Mode:</h3>
+          <input style="margin-left: 49%;" type="checkbox" id="darkSwitch" class="checkbox" />
+          <button id="closeBtn" style="margin-left: 30px; background: rgb(179, 176, 176); border: black; border-radius: 4px; font-size: 20px; padding: 10px; margin: 0 auto; display: table; margin-top: 50px;"><i class="fa fa-times"></i></button>
+        </div>
     </div>
-
 </body>
 </html>

@@ -8,12 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const keys = document.querySelectorAll(".keyboard-row button");
     const messageText = document.getElementById("messageText");
+    const closeBtn = document.getElementById("closeBtn");
+    const settingsEl = document.getElementById('settings');
+    const darkSwitch = document.getElementById("darkSwitch");
+    let dark = false
 
     function getNewWord() {
       let wordNum = Math.floor(Math.random() * (WordList.length - 0 + 1)) + 0;
       let word = WordList[wordNum];
       return word;
-    }
+    };
 
     function getCurrentWordArr() {
         const numberOfGuessedWords = guessedWords.length;
@@ -111,11 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWordCount += 1;
 
         if (currentWord === word) {
-            showMessage("You Win!")
+            showMessage("You Win!");
         };
 
         if (guessedWords.length === 6) {
-            showMessage("You Lose")
+            showMessage("You Lose");
         };
 
         guessedWords.push([]);
@@ -135,13 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleDeleteLetter() {
         const currentWordArr = getCurrentWordArr();
         if (currentWordArr.length === 0) {
-          return
-        }
+          return;
+        };
         const removedLetter = currentWordArr.pop();
 
         if (messageText.style.display === "table") {
           messageText.style.display = "none";
-        }
+        };
     
         guessedWords[guessedWords.length - 1] = currentWordArr;
     
@@ -150,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lastLetterEl.textContent = "";
         availableSpace = availableSpace - 1;
       };
+
 
     
     async function forLoop() {
@@ -172,7 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
+    closeBtn.addEventListener("click", () => {
+      settingsEl.style.display = "none";
+      let darkValue = document.getElementById("darkSwitch").value
+    });
 
-
-    forLoop()
+    forLoop();
 });
