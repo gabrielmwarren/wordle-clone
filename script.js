@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const statsBtn = document.getElementById("statsBtn");
     const statsEl = document.getElementById("stats");
     const statsClose = document.getElementById("statsClose");
+    const winsEl = document.getElementById("stats1");
+    const lossesEl = document.getElementById("stats2");
+    const percentWinEl = document.getElementById("stats3");
+    const playedEl = document.getElementById("stats4");
 
     function getNewWord() {
       let wordNum = Math.floor(Math.random() * (WordList.length - 0 + 1)) + 0;
@@ -87,11 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
         };
       };
 
-    function browserWins() {
-      let wins = Number(localStorage.getItem('wins'))
-      let winsPls1 = wins ++
-      localStorage.setItem('wins', wins);
-    }
+    function browserWinsCount() {
+      localStorage.getItem('wins') ? null : localStorage.setItem('wins', 0);
+      let wins = Number(localStorage.getItem('wins'));
+      let winsPls1 = wins += 1;
+      localStorage.setItem('wins', winsPls1);
+    };
+
+    function browserLossesCount() {
+      localStorage.getItem('losses') ? null : localStorage.setItem('losses', 0);
+      let losses = Number(localStorage.getItem('losses'));
+      let lossesPls1 = losses += 1;
+      console.log(lossesPls1)
+      localStorage.setItem('losses', String(lossesPls1));
+    };
 
     async function handleSubmitWord() {
         const currentWordArr  = getCurrentWordArr();
@@ -129,11 +142,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {
             showMessage("You Win!");
-            browserWins()
+            browserWinsCount();
         };
 
         if (guessedWords.length === 6 && !(currentWord === word)) {
             showMessage(`You Lose, The Word Is ${word}`);
+            browserLossesCount();
         };
 
         guessedWords.push([]);
@@ -210,6 +224,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     statsBtn.addEventListener("click", () => {
+      localStorage.getItem('wins') ? winsEl.innerText = localStorage.getItem('wins') : winsEl.innerText = "0"
+      localStorage.getItem('losses') ? lossesEl.innerText = localStorage.getItem('losses') : lossesEl.innerText = "0"
+      let percentage = (10 * winsEl.innerText) / lossesEl.innerText;
+      if (!(percentage)) {
+        percentage = "0"
+      }
+      percentWinEl.innerText = String(parseInt(percentage)) + " %"
+      playedEl.innerText = String(Number(winsEl.innerText) + Number(lossesEl.innerText))
       statsEl.style.display = "grid";
     });
 
