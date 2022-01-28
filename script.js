@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let guessedWords = [[]];
     let availableSpace = 1;
     let guessedWordCount = 0;
+    let darkMode = false;
 
 
     const keys = document.querySelectorAll(".keyboard-row button");
@@ -12,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsEl = document.getElementById('settings');
     const darkSwitch = document.getElementById("darkSwitch");
     const settingsBtn = document.getElementById("settingsBtn");
-    const stylesheet = document.getElementById("stylesheet")
-    let darkMode = false;
+    const stylesheet = document.getElementById("stylesheet");
+    const statsBtn = document.getElementById("statsBtn");
+    const statsEl = document.getElementById("stats");
+    const statsClose = document.getElementById("statsClose");
 
     function getNewWord() {
       let wordNum = Math.floor(Math.random() * (WordList.length - 0 + 1)) + 0;
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return guessedWords[numberOfGuessedWords - 1];
     };
 
-    const word = getNewWord();
+    let word = getNewWord();
 
     function updateGuessedWords(letter) {
         const currentWordArr = getCurrentWordArr();
@@ -38,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
           availableSpace = availableSpace + 1;
           availableSpaceEl.textContent = letter;
-          availableSpaceEl.style = `border-color: var(--on-input-border);`
-          availableSpaceEl.style.setProperty('--animate-duration', '.5s')
-          availableSpaceEl.classList.add('animate__pulse')
+          availableSpaceEl.style = `border-color: var(--on-input-border);`;
+          availableSpaceEl.style.setProperty('--animate-duration', '.5s');
+          availableSpaceEl.classList.add('animate__pulse');
         };
     };
     
@@ -84,6 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
         };
       };
 
+    function browserWins() {
+      let wins = Number(localStorage.getItem('wins'))
+      let winsPls1 = wins ++
+      localStorage.setItem('wins', wins);
+    }
+
     async function handleSubmitWord() {
         const currentWordArr  = getCurrentWordArr();
         if (currentWordArr.length != 5) {
@@ -103,8 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const currentWord = currentWordArr.join('');
 
-        console.log(document.querySelector("div.square"))
-
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
@@ -122,9 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {
             showMessage("You Win!");
+            browserWins()
         };
 
-        if (guessedWords.length === 6) {
+        if (guessedWords.length === 6 && !(currentWord === word)) {
             showMessage(`You Lose, The Word Is ${word}`);
         };
 
@@ -133,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createSquares() {
         const gameBoard = document.getElementById("board");
+        gameBoard.innerHTML = ''
         for (let index = 0; index < 30; index++) {
             let square = document.createElement("div");
             square.classList.add("square");
@@ -189,14 +198,23 @@ document.addEventListener("DOMContentLoaded", () => {
       let darkValue = darkSwitch.checked;
       darkMode = darkValue;
       if (darkMode) {
-        stylesheet.setAttribute('href', 'styles.css')
+        stylesheet.setAttribute('href', 'styles.css');
       } else {
-        stylesheet.setAttribute('href', 'light.css')
-      }
+        stylesheet.setAttribute('href', 'light.css');
+      };
     });
 
     settingsBtn.addEventListener("click", () => {
       settingsEl.style.display = 'block';
+    });
+
+
+    statsBtn.addEventListener("click", () => {
+      statsEl.style.display = "grid";
+    });
+
+    statsClose.addEventListener("click", () => {
+      statsEl.style.display = "none";
     });
 
 

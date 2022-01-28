@@ -7,7 +7,7 @@
     <title>Wordle Clone!</title>
     <script src="words.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link id="stylesheet" rel="stylesheet" href="light.css">
 </head>
 <body>
@@ -15,7 +15,8 @@
         <div id="game">
             <header style="text-align: center;">
                 <h1 class="title" style="display: inline-block; text-align: center;">WORDLE</h1>
-                <button id="settingsBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-left: 30px; margin-top: 15px;"><i class="fa fa-cog fa-2x"></i></button>
+                <button id="statsBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-left: 20px; margin-top: 15px;"><i class="fas fa-chart-line fa-2x"></i></button>
+                <button id="settingsBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-left: 60px; margin-top: 15px;"><i class="fas fa-cog fa-2x"></i></button>
             </header>
             <h2 id="messageText" class="animate__animated animate__bounce"></h2>
             <div id="board-container">
@@ -59,6 +60,10 @@
                   <button data-key="del" class="wide-button">Del</button>
                 </div>
             </div>
+        </div>
+        <div class="stats" id="stats">
+          <h4 style="grid-column-start: 1; text-align: center; margin-top: 25px;">In</h4>
+          <h4 style="grid-column-start: 2; text-align: center; margin-top: 25px;">Progress:</h4>
         </div>
         <div id="settings" class="animate__animated animate__backInUp" style="height: 100%; background-color: white; position: absolute; width: 100%; display: none;">
           <h1 style="font-size: 35px; text-align: center;">Settings</h1>

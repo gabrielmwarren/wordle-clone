@@ -208,6 +208,10 @@ input:checked + .slider:before {
   color: white;
 }
 
+.fa-chart-line {
+  color: white;
+}
+
 #messageText {
   color: black;
   background-color: white;

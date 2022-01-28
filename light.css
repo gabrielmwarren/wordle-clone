@@ -216,3 +216,17 @@ input:checked + .slider:before {
   margin: 10px auto;
   display: none;
 }
+
+.stats {
+  display: none;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 800px;
+  height: 30%;
+  color: white;
+  background-color: rgb(117, 117, 117);
+  position: absolute;
+  margin-top: 20%;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 50% 50%;
+}
