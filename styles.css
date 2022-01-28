@@ -4,10 +4,12 @@
   }
 
   :root {
-    --incorect-letter: rgb(58, 58, 60);
+    --incorect-letter: #3A3A3C;
     --correct-letter: rgb(83, 141, 78);
     --wrong-place-letter: rgb(181, 159, 59);
-    --square-text-filled: black;
+    --square-text-filled: gainsboro;
+    --square-border: rgb(58, 58, 60);
+    --on-input-border:  white;
   }
   
   html,

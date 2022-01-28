@@ -8,6 +8,8 @@
     --correct-letter: #6AAA64;
     --wrong-place-letter: #C9B458;
     --square-text-filled: white;
+    --square-border: #D3D6DA;
+    --on-input-border:  black;
   }
   
   html,

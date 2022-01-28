@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
           availableSpace = availableSpace + 1;
           availableSpaceEl.textContent = letter;
+          availableSpaceEl.style = `border-color: var(--on-input-border);`
+          availableSpaceEl.style.setProperty('--animate-duration', '.5s')
+          availableSpaceEl.classList.add('animate__pulse')
         };
     };
     
@@ -153,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWords[guessedWords.length - 1] = currentWordArr;
     
         const lastLetterEl = document.getElementById(String(availableSpace - 1));
+        lastLetterEl.style.setProperty('border-color', 'var(--square-border)')
     
         lastLetterEl.textContent = "";
         availableSpace = availableSpace - 1;
