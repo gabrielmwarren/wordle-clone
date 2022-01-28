@@ -226,12 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
     statsBtn.addEventListener("click", () => {
       localStorage.getItem('wins') ? winsEl.innerText = localStorage.getItem('wins') : winsEl.innerText = "0"
       localStorage.getItem('losses') ? lossesEl.innerText = localStorage.getItem('losses') : lossesEl.innerText = "0"
-      let percentage = (10 * winsEl.innerText) / lossesEl.innerText;
+      let percentage = Math.round((winsEl.innerText / lossesEl.innerText) * 100)
       if (!(percentage)) {
         percentage = "0"
+      } else if (percentage > 100) {
+        percentage = 100
       }
       percentWinEl.innerText = String(parseInt(percentage)) + " %"
-      playedEl.innerText = String(Number(winsEl.innerText) + Number(lossesEl.innerText))
+      playedEl.innerText = String(Number(lossesEl.innerText) + Number(winsEl.innerText))
       statsEl.style.display = "grid";
     });
 
