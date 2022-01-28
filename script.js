@@ -1,11 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
     createSquares();
 
+    // Variables
     let guessedWords = [[]];
     let availableSpace = 1;
     let guessedWordCount = 0;
     let darkMode = false;
 
+    // DOM Elements
 
     const keys = document.querySelectorAll(".keyboard-row button");
     const messageText = document.getElementById("messageText");
@@ -22,18 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const percentWinEl = document.getElementById("stats3");
     const playedEl = document.getElementById("stats4");
 
+
+    // Generates New Word
+
     function getNewWord() {
       let wordNum = Math.floor(Math.random() * (WordList.length - 0 + 1)) + 0;
       let word = WordList[wordNum];
       return word;
     };
 
+    // List Of Current Word Letters
+
     function getCurrentWordArr() {
         const numberOfGuessedWords = guessedWords.length;
         return guessedWords[numberOfGuessedWords - 1];
     };
 
+    // Get New Word
+
     let word = getNewWord();
+
+    // Update Display When Letter Clicked
 
     function updateGuessedWords(letter) {
         const currentWordArr = getCurrentWordArr();
@@ -45,23 +56,30 @@ document.addEventListener("DOMContentLoaded", () => {
     
           availableSpace = availableSpace + 1;
           availableSpaceEl.textContent = letter;
+          // Set The Right Colors And Animations
           availableSpaceEl.style = `border-color: var(--on-input-border);`;
           availableSpaceEl.style.setProperty('--animate-duration', '.5s');
           availableSpaceEl.classList.add('animate__pulse');
         };
     };
+
+    // Show Messgae At Top Of Screen
     
     function showMessage(text) {
       messageText.innerText = text;
+      // Add Animation Classes
       messageText.classList.add("animate__animated");
       messageText.classList.add("animate__rubberBand");
       messageText.style.display = "table";
     };
 
+    // Check Letter Pos And Return Correct Color
 
     function getTileColor(letter, index,  word) {
         const isCorrectLetter = word.includes(letter);
     
+        // Not In Word
+
         if (!isCorrectLetter) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
@@ -74,14 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const letterInThatPosition = word.charAt(index);
         const isCorrectPosition = letter === letterInThatPosition;
     
-        if (isCorrectPosition) {
+        if (isCorrectPosition) { // Corect Letter In Correct Spot
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
               keys[i].style.backgroundColor = "var(--correct-letter)"
             };
           };
           return "var(--correct-letter)"
-        } else if (isCorrectLetter) {
+        } else if (isCorrectLetter) { // Letter Is In Word At Wrong Spot
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
               keys[i].style.backgroundColor = "var(--wrong-place-letter)"
@@ -91,12 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
         };
       };
 
+    // Save Wins In Browser
+
     function browserWinsCount() {
       localStorage.getItem('wins') ? null : localStorage.setItem('wins', 0);
       let wins = Number(localStorage.getItem('wins'));
       let winsPls1 = wins += 1;
       localStorage.setItem('wins', winsPls1);
     };
+
+    // Save Losses In Browser
 
     function browserLossesCount() {
       localStorage.getItem('losses') ? null : localStorage.setItem('losses', 0);
@@ -113,6 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         };
 
+        // See If Word Is Valid With Merriam Webster API
+
         let res = await fetch(`https://dictionaryapi.com/api/v3/references/sd3/json/${currentWordArr}?key=930fd199-60e3-4396-bc16-9cd4ccc8c4b0`);
         let response = await res.json();
         let resOne = response[0]; 
@@ -124,6 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const currentWord = currentWordArr.join('');
+
+        // Flipping Animation
 
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
@@ -140,6 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         guessedWordCount += 1;
 
+        // See If You Win Or Lose
+
         if (currentWord === word) {
             showMessage("You Win!");
             browserWinsCount();
@@ -153,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
         guessedWords.push([]);
     };
 
+    // Create Game Squares
+
     function createSquares() {
         const gameBoard = document.getElementById("board");
         gameBoard.innerHTML = ''
@@ -164,6 +194,8 @@ document.addEventListener("DOMContentLoaded", () => {
             gameBoard.appendChild(square);
         };
     };
+
+    // When Del Clicked
 
     function handleDeleteLetter() {
         const currentWordArr = getCurrentWordArr();
@@ -186,8 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
 
+    // Main Function
+    // Checks When Keys Are Pressed
     
-    async function forLoop() {
+    async function main() {
         for (let i = 0; i < keys.length; i++) {
             keys[i].onclick = ({ target }) => {
               const letter = target.getAttribute("data-key");
@@ -207,6 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
+    // Close And Save Settings
+
     closeBtn.addEventListener("click", () => {
       settingsEl.style.display = "none";
       let darkValue = darkSwitch.checked;
@@ -218,10 +254,13 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     });
 
+    // Close Settings
+
     settingsBtn.addEventListener("click", () => {
       settingsEl.style.display = 'block';
     });
 
+    // Open Stats Menu And Fill Out Info
 
     statsBtn.addEventListener("click", () => {
       localStorage.getItem('wins') ? winsEl.innerText = localStorage.getItem('wins') : winsEl.innerText = "0"
@@ -237,10 +276,13 @@ document.addEventListener("DOMContentLoaded", () => {
       statsEl.style.display = "grid";
     });
 
+    // Close Stats Meu
+
     statsClose.addEventListener("click", () => {
       statsEl.style.display = "none";
     });
 
+    // Run Main Program
 
-    forLoop();
+    main();
 });
