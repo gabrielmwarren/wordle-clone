@@ -2,6 +2,13 @@
     margin: 0;
     padding: 0;
   }
+
+  :root {
+    --incorect-letter: rgb(58, 58, 60);
+    --correct-letter: rgb(83, 141, 78);
+    --wrong-place-letter: rgb(181, 159, 59);
+    --square-text-filled: black;
+  }
   
   html,
   body {

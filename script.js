@@ -55,18 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isCorrectLetter) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              if (darkMode) {
-                keys[i].style.backgroundColor = "rgb(58, 58, 60)";
-              } else {
-                keys[i].style.backgroundColor = "#787C7E";
-              };
+              keys[i].style.backgroundColor = "var(--incorect-letter)"
             };
           };
-          if (darkMode) {
-            return "rgb(58, 58, 60)";
-          } else {
-            return "#787C7E"
-          }
+          return "var(--incorect-letter)"
         };
     
         const letterInThatPosition = word.charAt(index);
@@ -75,33 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isCorrectPosition) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              if (darkMode) {
-                keys[i].style.backgroundColor = "rgb(83, 141, 78)";
-              } else {
-                keys[i].style.backgroundColor = "#6AAA64";
-              };
+              keys[i].style.backgroundColor = "var(--correct-letter)"
             };
           };
-          if (darkMode) {
-            return "rgb(83, 141, 78)";
-          } else {
-            return "#6AAA64"
-          }
+          return "var(--correct-letter)"
         } else if (isCorrectLetter) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              if (darkMode) {
-                keys[i].style.backgroundColor = "rgb(181, 159, 59)";
-              } else {
-                keys[i].style.backgroundColor = "#C9B458";
-              }
+              keys[i].style.backgroundColor = "var(--wrong-place-letter)"
             };
           };
-          if (darkMode) {
-            return "rgb(181, 159, 59)";
-          } else {
-            return "#C9B458"
-          }
+          return "var(--wrong-place-letter)"
         };
       };
 
@@ -124,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const currentWord = currentWordArr.join('');
 
+        console.log(document.querySelector("div.square"))
+
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
@@ -133,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const letterId = firstLetterId + index;
             const letterEl = document.getElementById(letterId);
             letterEl.classList.add("animate__flipInX");
-            letterEl.style = `background-color:${tileColor};border-color:${tileColor}`;
+            letterEl.style = `background-color:${tileColor};border-color:${tileColor};color: var(--square-text-filled);`;
           }, interval * index);
         });
 

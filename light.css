@@ -2,12 +2,18 @@
     margin: 0;
     padding: 0;
   }
+
+  :root {
+    --incorect-letter: #787C7E;
+    --correct-letter: #6AAA64;
+    --wrong-place-letter: #C9B458;
+    --square-text-filled: white;
+  }
   
   html,
   body {
     height: 100%;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
   }
   
   #container {
@@ -62,7 +68,7 @@
     min-height: 60px;
     font-size: 50px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: black;
     text-transform: uppercase;
   
     display: flex;
