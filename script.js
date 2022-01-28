@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeBtn = document.getElementById("closeBtn");
     const settingsEl = document.getElementById('settings');
     const darkSwitch = document.getElementById("darkSwitch");
-    let dark = false
+    const settingsBtn = document.getElementById("settingsBtn");
+    const stylesheet = document.getElementById("stylesheet")
+    let darkMode = false;
 
     function getNewWord() {
       let wordNum = Math.floor(Math.random() * (WordList.length - 0 + 1)) + 0;
@@ -53,10 +55,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isCorrectLetter) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              keys[i].style.backgroundColor = "rgb(58, 58, 60)";
+              if (darkMode) {
+                keys[i].style.backgroundColor = "rgb(58, 58, 60)";
+              } else {
+                keys[i].style.backgroundColor = "#787C7E";
+              };
             };
           };
-          return "rgb(58, 58, 60)";
+          if (darkMode) {
+            return "rgb(58, 58, 60)";
+          } else {
+            return "#787C7E"
+          }
         };
     
         const letterInThatPosition = word.charAt(index);
@@ -65,24 +75,39 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isCorrectPosition) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              keys[i].style.backgroundColor = "rgb(83, 141, 78)";
+              if (darkMode) {
+                keys[i].style.backgroundColor = "rgb(83, 141, 78)";
+              } else {
+                keys[i].style.backgroundColor = "#6AAA64";
+              };
             };
           };
-          return "rgb(83, 141, 78)";
+          if (darkMode) {
+            return "rgb(83, 141, 78)";
+          } else {
+            return "#6AAA64"
+          }
         } else if (isCorrectLetter) {
           for (let i = 0; i < keys.length; i++) {
             if (letter === keys[i].innerText.toLowerCase()) {
-              keys[i].style.backgroundColor = "rgb(181, 159, 59)";
+              if (darkMode) {
+                keys[i].style.backgroundColor = "rgb(181, 159, 59)";
+              } else {
+                keys[i].style.backgroundColor = "#C9B458";
+              }
             };
           };
-          return "rgb(181, 159, 59)";
+          if (darkMode) {
+            return "rgb(181, 159, 59)";
+          } else {
+            return "#C9B458"
+          }
         };
       };
 
     async function handleSubmitWord() {
         const currentWordArr  = getCurrentWordArr();
         if (currentWordArr.length != 5) {
-            const gameBoard = document.getElementById("board");
             showMessage("Must Be Five Letters");
             return;
         };
@@ -119,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         if (guessedWords.length === 6) {
-            showMessage("You Lose");
+            showMessage(`You Lose, The Word Is ${word}`);
         };
 
         guessedWords.push([]);
@@ -179,8 +204,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeBtn.addEventListener("click", () => {
       settingsEl.style.display = "none";
-      let darkValue = document.getElementById("darkSwitch").value
+      let darkValue = darkSwitch.checked;
+      darkMode = darkValue;
+      if (darkMode) {
+        stylesheet.setAttribute('href', 'styles.css')
+      } else {
+        stylesheet.setAttribute('href', 'light.css')
+      }
     });
+
+    settingsBtn.addEventListener("click", () => {
+      settingsEl.style.display = 'block';
+    });
+
 
     forLoop();
 });
