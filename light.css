@@ -103,6 +103,14 @@
     }
   }
 
+  @media only screen and (max-height: 430px) {
+    .square {
+      min-width: 10px;
+      min-height: 10px;
+      font-size: 5px;
+    }
+  }
+
   #keyboard-container {
     height: 200px;
   }
