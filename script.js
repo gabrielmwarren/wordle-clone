@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
 
     let word = getNewWord();
 
+    // Check Theme Stored In Local Storage And Set The Display To It
+    localStorage.getItem('theme') ? stylesheet.setAttribute('href', localStorage.getItem('theme')) : localStorage.setItem('theme', 'light.css');
+
     // Update Display When Letter Clicked
 
     function updateGuessedWords(letter) {
@@ -220,6 +223,11 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
         availableSpace = availableSpace - 1;
       };
 
+    // Save The Last Selected Theme In Local Storage
+    function saveTheme(theme) {
+      localStorage.setItem('theme', theme)
+    }
+
 
     // Main Function
     // Checks When Keys Are Pressed
@@ -252,8 +260,10 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
       darkMode = darkValue;
       if (darkMode) {
         stylesheet.setAttribute('href', 'styles.css');
+        saveTheme('styles.css');
       } else {
         stylesheet.setAttribute('href', 'light.css');
+        saveTheme('light.css')
       };
     });
 
@@ -261,6 +271,9 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
 
     settingsBtn.addEventListener("click", () => {
       settingsEl.style.display = 'block';
+      if (localStorage.getItem('theme') === "styles.css") {
+        darkSwitch.checked = "true";
+      };
     });
 
     // Open Stats Menu And Fill Out Info
