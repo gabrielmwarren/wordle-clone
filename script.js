@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
     let word = getNewWord();
 
     // Check Theme Stored In Local Storage And Set The Display To It
-    localStorage.getItem('theme') ? stylesheet.setAttribute('href', localStorage.getItem('theme')) : localStorage.setItem('theme', 'light.css');
+    localStorage.getItem('theme') ? stylesheet.setAttribute('href', localStorage.getItem('theme')) : localStorage.setItem('theme', './light.css');
 
     // Update Display When Letter Clicked
 
@@ -260,10 +260,10 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
       darkMode = darkValue;
       if (darkMode) {
         stylesheet.setAttribute('href', 'styles.css');
-        saveTheme('styles.css');
+        saveTheme('./styles.css');
       } else {
         stylesheet.setAttribute('href', 'light.css');
-        saveTheme('light.css')
+        saveTheme('./light.css')
       };
     });
 
