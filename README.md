@@ -1,4 +1,4 @@
 # wordle-clone
 Clone Of The Word Game Wordle
 
-### Live Demo At HTTPS://GABRIELMWARREN.GITHUB.IO/WORDLE-CLONE/
+### Live Demo At [GH Pages](https://gabrielmwarren.github.io/wordle-clone/)
