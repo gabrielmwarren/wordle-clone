@@ -278,6 +278,10 @@ input:checked + .slider:before {
   color: white;
 }
 
+.fa-times {
+  color: white;
+}
+
 #messageText {
   color: black;
   background-color: white;
@@ -318,8 +322,4 @@ input:checked + .slider:before {
   width: 80%;
   max-width: 500px;
   margin: 0 auto;
-}
-
-.fa-times {
-  color: white;
 }
