@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Clone!</title>
+    <title>I Wordle: Wordle Clone</title>
     <script src="words.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -96,12 +96,12 @@
               <h2 style="margin: 30px; text-align: center; display: inline-block;">HOW TO PLAY</h2>
               <button id="infoClose" style="display: inline-block; background: none; border: none;"><i class="fa fa-times fa-2x"></i></button>
             </header>
-            <p style="margin-bottom: 20px;"><span">Guess the <span style="color: var(--main-text); font-weight: bold; padding: 2px;">WORDLE</span> in 6 tries.<br></span></p>
+            <p style="margin-bottom: 20px;"><span">Guess the <span style="font-weight: bold; padding: 2px; color: var(--on-input-border);">WORDLE</span> in 6 tries.<br></span></p>
             <p style="padding-bottom: 20px;"><span style="margin-top: 20px;">Each guess must be a valid 5 letter word. Hit the enter button to submit.</span></p>
             <p style="padding-bottom: 15px;"><span>After each guess, the color of the tiles will change to show how close your guess was to the word.</span></p>
             <hr>
             <div class="examples">
-              <p style="padding-top: 15px;"><span style="color: black; font-weight: bold; padding-top: 15px;">Examples</span></p>
+              <p style="padding-top: 15px;"><span style="color: var(--on-input-border); font-weight: bold; padding-top: 15px;">Examples</span></p>
               <div class="example" style="padding-top: 30px;">
                 <div id="board-container">
                   <div id="board" style="padding-bottom: 20px;">
@@ -112,7 +112,7 @@
                     <div class="square">R</div>
                   </div>
                 </div>
-                <p>The letter <span style="font-weight: bold; color: black;">W</span> is in the word and in the correct spot.</p>
+                <p>The letter <span style="font-weight: bold; color: var(--on-input-border);">W</span> is in the word and in the correct spot.</p>
               </div>
             </div>
             <div class="example" style="padding-top: 25px;">
@@ -125,7 +125,7 @@
                   <div class="square">R</div>
                 </div>
               </div>
-              <p>The letter <span style="font-weight: bold; color: black;">E</span> is in the word but in the wrong spot.</p>
+              <p>The letter <span style="font-weight: bold; color: var(--on-input-border);">E</span> is in the word but in the wrong spot.</p>
             </div>
             <div class="example" style="padding-top: 25px;">
               <div id="board-container">
@@ -137,7 +137,7 @@
                   <div class="square" style="background-color: var(--incorect-letter);">D</div>
                 </div>
               </div>
-              <p>The letter <span style="font-weight: bold; color: black;">D</span> is not in the word in any spot.</p>
+              <p>The letter <span style="font-weight: bold; color: var(--on-input-border);">D</span> is not in the word in any spot.</p>
             </div>
           </div>
           </div>
