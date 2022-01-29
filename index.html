@@ -13,10 +13,11 @@
 <body>
     <div id="container">
         <div id="game">
-            <header style="text-align: center;">
-                <h1 class="title" style="display: inline-block; text-align: center;">WORDLE</h1>
+            <header style="text-align: center;" class="title-header">
+                <h1 class="title" style="text-align: center; display: inline-block;">WORDLE</h1>
                 <button id="statsBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-left: 20px; margin-top: 15px;"><i class="fas fa-chart-line fa-2x"></i></button>
                 <button id="settingsBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-left: 60px; margin-top: 15px;"><i class="fas fa-cog fa-2x"></i></button>
+                <button id="infoBtn" style="position: absolute; border: none; background: none; display: inline-block; margin-top: 15px; margin-left: 100px;"><i class="fas fa-question-circle fa-2x"></i></button>
             </header>
             <h2 id="messageText" class="animate__animated animate__bounce"></h2>
             <div id="board-container">
@@ -61,6 +62,8 @@
                 </div>
             </div>
         </div>
+
+        
         <div class="stats" id="stats">
           <button id="statsClose" style="background: none; border: none; grid-column: 4/4; margin-left: 40px; margin-top: 15px;"><i class="fa fa-times fa-2x"></i></button>
           <h3 style="grid-column-start: 1; text-align: center; margin-top: 25px;">Wins:</h3>
@@ -73,6 +76,8 @@
           <h1 id="stats3" style="grid-column-start: 3; text-align: center; margin-top: 25px; grid-row-start: 3">50 %</h1>
           <h1 id="stats4" style="grid-column-start: 4; text-align: center; margin-top: 25px; grid-row-start: 3;">10</h1>
         </div>
+
+
         <div id="settings" class="animate__animated animate__backInUp" style="height: 100%; background-color: white; position: absolute; width: 100%; display: none;">
           <h1 style="font-size: 35px; text-align: center;">Settings</h1>
           <h3 style="text-align: center; margin-top: 100px; padding-bottom: 30px;">Dark Mode:</h3>
@@ -83,6 +88,61 @@
           <button id="closeBtn" style="margin-left: 30px; background: rgb(179, 176, 176); border: black; border-radius: 4px; font-size: 20px; padding: 10px; margin: 0 auto; display: table; margin-top: 50px;"><i class="fa fa-times"></i></button>
           <p style="text-align: center; margin-top: 50px;">Copyright 2022 Gabriel M. Warren</p>
         </div>
+
+
+        <div class="info animate__animated animate__backInUp" id="info">
+          <div class="info-container">
+            <header style="text-align: center;">
+              <h2 style="margin: 30px; text-align: center; display: inline-block;">HOW TO PLAY</h2>
+              <button id="infoClose" style="display: inline-block; background: none; border: none;"><i class="fa fa-times fa-2x"></i></button>
+            </header>
+            <p style="margin-bottom: 20px;"><span">Guess the <span style="color: var(--main-text); font-weight: bold; padding: 2px;">WORDLE</span> in 6 tries.<br></span></p>
+            <p style="padding-bottom: 20px;"><span style="margin-top: 20px;">Each guess must be a valid 5 letter word. Hit the enter button to submit.</span></p>
+            <p style="padding-bottom: 15px;"><span>After each guess, the color of the tiles will change to show how close your guess was to the word.</span></p>
+            <hr>
+            <div class="examples">
+              <p style="padding-top: 15px;"><span style="color: black; font-weight: bold; padding-top: 15px;">Examples</span></p>
+              <div class="example" style="padding-top: 30px;">
+                <div id="board-container">
+                  <div id="board" style="padding-bottom: 20px;">
+                    <div class="square" style="background-color: var(--correct-letter);">W</div>
+                    <div class="square">A</div>
+                    <div class="square">T</div>
+                    <div class="square">E</div>
+                    <div class="square">R</div>
+                  </div>
+                </div>
+                <p>The letter <span style="font-weight: bold; color: black;">W</span> is in the word and in the correct spot.</p>
+              </div>
+            </div>
+            <div class="example" style="padding-top: 25px;">
+              <div id="board-container">
+                <div id="board" style="padding-bottom: 20px;">
+                  <div class="square">P</div>
+                  <div class="square">A</div>
+                  <div class="square">P</div>
+                  <div class="square" style="background-color: var(--wrong-place-letter);">E</div>
+                  <div class="square">R</div>
+                </div>
+              </div>
+              <p>The letter <span style="font-weight: bold; color: black;">E</span> is in the word but in the wrong spot.</p>
+            </div>
+            <div class="example" style="padding-top: 25px;">
+              <div id="board-container">
+                <div id="board" style="padding-bottom: 20px;">
+                  <div class="square">M</div>
+                  <div class="square">O</div>
+                  <div class="square">V</div>
+                  <div class="square">E</div>
+                  <div class="square" style="background-color: var(--incorect-letter);">D</div>
+                </div>
+              </div>
+              <p>The letter <span style="font-weight: bold; color: black;">D</span> is not in the word in any spot.</p>
+            </div>
+          </div>
+          </div>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>

@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
     const lossesEl = document.getElementById("stats2");
     const percentWinEl = document.getElementById("stats3");
     const playedEl = document.getElementById("stats4");
+    const infoButton = document.getElementById("infoBtn");
+    const infoEl = document.getElementById("info");
+    const infoClose = document.getElementById("infoClose");
 
 
     // Generates New Word
@@ -254,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
       };
     });
 
-    // Close Settings
+    // Open Settings
 
     settingsBtn.addEventListener("click", () => {
       settingsEl.style.display = 'block';
@@ -282,7 +285,17 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
       statsEl.style.display = "none";
     });
 
-    // Run Main Program
+    // Open How To Play Screen
+    infoButton.addEventListener("click", () => {
+      infoEl.style.display = "block";
+    });
+
+    // Close How To Play
+    infoClose.addEventListener("click", () => {
+      infoEl.style.display = "none";
+    });
+
+    // Run Main Function
 
     main();
 });
