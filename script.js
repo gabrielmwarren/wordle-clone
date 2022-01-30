@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
           availableSpaceEl.classList.add('animate__pulse');
         };
     };
+    
 
     // Show Messgae At Top Of Screen
     
@@ -79,11 +80,72 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
       messageText.style.display = "table";
     };
 
+
+    // Check For Double Letters
+    function isLetterInWord(letter, word, input) {
+      for (let i = 0; i < word.length; i++) {
+        if (letter === word.charAt(i) && word.charAt(i) === input[i]) {
+          return true;
+        };
+      };
+      return false;
+    };
+
     // Check Letter Pos And Return Correct Color
 
-    function getTileColor(letter, index,  word) {
-        const isCorrectLetter = word.includes(letter);
+    function getTileColor(letter, index,  word, input) {
+        let countList = [];
+        let repeats = {};
+        const letterInThatPosition = word.charAt(index);
+        const isCorrectPosition = letter === letterInThatPosition;
+        const isCorrectLetter = word.includes(letter) && !isLetterInWord(letter, word, input);
+
+        for (let i = 0; i < input.length; i++) {
+          if (countList.includes(input.charAt(i))) {
+            repeats[input.charAt(i)] = i;
+          }
+          countList.push(input.charAt(i));
+        };
+
+        if (repeats.hasOwnProperty(letter) && isCorrectLetter) {
+          if (repeats[letter] > index) {
+            for (let i = 0; i < keys.length; i++) {
+              if (letter === keys[i].innerText.toLowerCase()) {
+                keys[i].style.backgroundColor = "var(--wrong-place-letter)"
+              };
+            };
+            return "var(--wrong-place-letter)"
+          } else {
+            for (let i = 0; i < keys.length; i++) {
+              if (letter === keys[i].innerText.toLowerCase()) {
+                keys[i].style.backgroundColor = "var(--incorect-letter)"
+              };
+            };
+            return "var(--incorect-letter)"
+          }
+        };
+
+        // Corect Letter In Correct Spot
     
+        if (isCorrectPosition) {
+          for (let i = 0; i < keys.length; i++) {
+            if (letter === keys[i].innerText.toLowerCase()) {
+              keys[i].style.backgroundColor = "var(--correct-letter)"
+            };
+          };
+          return "var(--correct-letter)"
+
+          // Letter Is In Word At Wrong Spot
+
+        } else if (isCorrectLetter) {
+          for (let i = 0; i < keys.length; i++) {
+            if (letter === keys[i].innerText.toLowerCase()) {
+              keys[i].style.backgroundColor = "var(--wrong-place-letter)"
+            };
+          };
+          return "var(--wrong-place-letter)"
+        };
+
         // Not In Word
 
         if (!isCorrectLetter) {
@@ -94,26 +156,8 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
           };
           return "var(--incorect-letter)"
         };
-    
-        const letterInThatPosition = word.charAt(index);
-        const isCorrectPosition = letter === letterInThatPosition;
-    
-        if (isCorrectPosition) { // Corect Letter In Correct Spot
-          for (let i = 0; i < keys.length; i++) {
-            if (letter === keys[i].innerText.toLowerCase()) {
-              keys[i].style.backgroundColor = "var(--correct-letter)"
-            };
-          };
-          return "var(--correct-letter)"
-        } else if (isCorrectLetter) { // Letter Is In Word At Wrong Spot
-          for (let i = 0; i < keys.length; i++) {
-            if (letter === keys[i].innerText.toLowerCase()) {
-              keys[i].style.backgroundColor = "var(--wrong-place-letter)"
-            };
-          };
-          return "var(--wrong-place-letter)"
-        };
       };
+      
 
     // Save Wins In Browser
 
@@ -161,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
           setTimeout(() => {
-            const tileColor = getTileColor(letter, index, word);
+            const tileColor = getTileColor(letter, index, word, currentWord);
 
             const letterId = firstLetterId + index;
             const letterEl = document.getElementById(letterId);
@@ -311,4 +355,4 @@ document.addEventListener("DOMContentLoaded", () => { // When HTML Is Loaded
     // Run Main Function
 
     main();
-});
+  });
